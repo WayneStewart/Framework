@@ -1,0 +1,64 @@
+# Ignore all at the root.
+/*
+
+# Except:
+!.gitignore
+!Resources
+!Project
+
+Project/DerivedData
+Project/BuildSettings
+
+Resources/Cache
+
+# Ignore everywhere.
+__MACOSX
+
+
+
+
+# Documentation 
+######################
+# https://blog.4d.com/project-databases-architecture/
+# https://www.jamescoyle.net/how-to/1094-ignoring-files-in-git-with-gitignore
+# https://gist.github.com/octocat/9257657
+
+
+# 4D project architecture
+######################
+# https://slack-files.com/T9PKNHRFU-FQCQX3XK7-eb8761f0aa
+
+# /Data/*
+# /Logs/*
+# /Project/DerivedData/*
+# /Project/BuildSettings/*
+# /Settings/*
+# /userPreferences*/*
+
+# My own suggestions
+# /Builds/*
+# /Components/*
+# *.4DD
+# *.4DIndx
+# *.4DSettings
+
+# OS generated files #
+######################
+# .DS_Store
+# .DS_Store?
+# ._*
+# .Spotlight-V100
+# .Trashes
+# ehthumbs.db
+# Thumbs.db
+
+# Thomas Maul Additions
+######################
+# *symbols.txt
+# *.4DIndy
+# *.4DB
+# *.4db
+# *.4dd
+# *.journal
+# Data
+# Folder_Reports
