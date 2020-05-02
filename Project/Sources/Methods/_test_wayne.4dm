@@ -12,12 +12,17 @@ $window.CloseBox(True:C214)
 
 $windowID_i:=$window.drawWindow()
 
-$window.Title("A Different Title")
+  //$anotherWindow:=$window.copy()
 
-$title:=$window.Title()
+  //$anotherWindow.Title("A Different Title")
 
-$window.Dimensions(900;600)
+  //$title:=$window.Title()
 
-$windowID_i:=$window.drawWindow()
+  //$anotherWindow.Dimensions(900;600)
+
+  //$AnotherwindowID_i:=$anotherWindow.drawWindow()
 
 $window.Close()
+
+  //$anotherWindow.Close()
+

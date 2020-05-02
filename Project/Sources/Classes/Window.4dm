@@ -1,3 +1,6 @@
+Class extends Object
+
+
 Class constructor
 	C_OBJECT:C1216($1)
 	If ($1.title#Null:C1517)
@@ -93,3 +96,17 @@ Function drawWindow
 	
 Function Close
 	CLOSE WINDOW:C154(This:C1470.windowID)
+	
+Function copy
+	$0:=Super:C1706.copy()
+	$0.windowID:=Null:C1517  // Remove the existing window reference
+	
+	
+Function formMethod
+	Case of 
+		: (Form event code:C388=On Resize:K2:27)
+			
+			
+	End case 
+	
+	
