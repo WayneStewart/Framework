@@ -77,8 +77,16 @@ Function drawWindow
 	$Wnd_Right_i:=$Wnd_Left_i+This:C1470.width
 	$Wnd_Bottom_i:=$Wnd_Top_i+This:C1470.height
 	
-	This:C1470.windowID:=Open window:C153($Wnd_Left_i;$Wnd_Top_i;$Wnd_Right_i;$Wnd_Bottom_i;This:C1470.style;This:C1470.closeBox)
-	SET WINDOW TITLE:C213(This:C1470.title)
+	If (This:C1470.windowID=Null:C1517)  // If it doesn't exist open it
+		This:C1470.windowID:=Open window:C153($Wnd_Left_i;$Wnd_Top_i;$Wnd_Right_i;$Wnd_Bottom_i;This:C1470.style;This:C1470.closeBox)
+		SET WINDOW TITLE:C213(This:C1470.title)
+	Else 
+		  // If it does exist move it
+		GET WINDOW RECT:C443($Wnd_Left_i;$Wnd_Top_i;$Wnd_Right_i;$Wnd_Bottom_i;This:C1470.windowID)
+		$Wnd_Right_i:=$Wnd_Left_i+This:C1470.width
+		$Wnd_Bottom_i:=$Wnd_Top_i+This:C1470.height
+		SET WINDOW RECT:C444($Wnd_Left_i;$Wnd_Top_i;$Wnd_Right_i;$Wnd_Bottom_i;This:C1470.windowID)
+	End if 
 	
 	  // Return the window ID as a number
 	$0:=This:C1470.windowID

@@ -10,17 +10,14 @@ $window.Style(Plain form window:K39:10)
 
 $window.CloseBox(True:C214)
 
-  //$anotherWindow:=cs.Window.new(New object("title";"another window";\
-"style";Modal dialog box))
-
-$window.Dimensions(400;200)
-
 $windowID_i:=$window.drawWindow()
 
 $window.Title("A Different Title")
 
 $title:=$window.Title()
 
+$window.Dimensions(900;600)
+
+$windowID_i:=$window.drawWindow()
+
 $window.Close()
-
-
