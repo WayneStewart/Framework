@@ -26,7 +26,6 @@ $title:=$window.Title()
 
 $anotherWindow.Dimensions(900;600)
 
-
 ARRAY LONGINT:C221($windows_ai;0)
 WINDOW LIST:C442($Windows_ai;*)
 
