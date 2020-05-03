@@ -12,6 +12,8 @@ $window.CloseBox(True:C214)
 
 $windowID_i:=$window.drawWindow()
 
+  //DIALOG("Dummy";New object("window";$window);*)
+
   //$anotherWindow:=$window.copy()
 
   //$anotherWindow.Title("A Different Title")
@@ -20,9 +22,14 @@ $windowID_i:=$window.drawWindow()
 
   //$anotherWindow.Dimensions(900;600)
 
-  //$AnotherwindowID_i:=$anotherWindow.drawWindow()
+
+ARRAY LONGINT:C221($windows_ai;0)
+WINDOW LIST:C442($Windows_ai;*)
 
 $window.Close()
+
+  //$AnotherwindowID_i:=$anotherWindow.drawWindow()
+
 
   //$anotherWindow.Close()
 

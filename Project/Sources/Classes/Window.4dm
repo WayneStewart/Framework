@@ -81,7 +81,7 @@ Function drawWindow
 	$Wnd_Bottom_i:=$Wnd_Top_i+This:C1470.height
 	
 	If (This:C1470.windowID=Null:C1517)  // If it doesn't exist open it
-		This:C1470.windowID:=Open window:C153($Wnd_Left_i;$Wnd_Top_i;$Wnd_Right_i;$Wnd_Bottom_i;This:C1470.style;This:C1470.closeBox)
+		This:C1470.windowID:=Open window:C153($Wnd_Left_i;$Wnd_Top_i;$Wnd_Right_i;$Wnd_Bottom_i;This:C1470.style;"";"WindowCloseBox")
 		SET WINDOW TITLE:C213(This:C1470.title)
 	Else 
 		  // If it does exist move it
@@ -95,7 +95,9 @@ Function drawWindow
 	$0:=This:C1470.windowID
 	
 Function Close
-	CLOSE WINDOW:C154(This:C1470.windowID)
+	C_LONGINT:C283($WindowID_i)
+	$WindowID_i:=This:C1470.windowID
+	CLOSE WINDOW:C154($WindowID_i)
 	
 Function copy
 	$0:=Super:C1706.copy()
@@ -105,6 +107,12 @@ Function copy
 Function formMethod
 	Case of 
 		: (Form event code:C388=On Resize:K2:27)
+			
+			
+		: (Form event code:C388=On Close Box:K2:21)
+			CANCEL:C270
+			
+		: (Form event code:C388=On Load:K2:1)
 			
 			
 	End case 
