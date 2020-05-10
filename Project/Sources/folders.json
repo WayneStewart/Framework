@@ -1,4 +1,17 @@
 ﻿{
+	"(Folder_1)": {},
+	"Constants (Cannon Smith)": {
+		"methods": [
+			"Compiler_Constants",
+			"Constants__Readme",
+			"Constants_AddLong",
+			"Constants_AddReal",
+			"Constants_AddString",
+			"Constants_NewFile",
+			"Constants_NewGroup",
+			"Constants_SaveFile"
+		]
+	},
 	"Default Classes": {},
 	"Default Folder": {
 		"groups": [
@@ -11,5 +24,9 @@
 	"Default Forms": {},
 	"Default Project Methods": {},
 	"Default Tables": {},
-	"trash": {}
+	"trash": {
+		"groups": [
+			"(Folder_1)"
+		]
+	}
 }
