@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><preferences stamp="5">
+	<com.4d>
+		<database>
+			<data_storage allow_data_read_only="true"/>
+			<cache flush_buffer_delay="20s" size_reserved="512"/>
+		</database>
+		<general allow_user_settings="false" execute_host_database_event="true"/>
+		<interface>
+			<user can_change_password="true"/>
+		</interface>
+	</com.4d>
+</preferences>

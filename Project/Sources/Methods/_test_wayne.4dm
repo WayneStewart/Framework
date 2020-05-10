@@ -3,20 +3,21 @@ C_OBJECT:C1216($window)
 C_TEXT:C284($title)
 
 
-  //ALERT("Plain form window: "+String(Plain form window)+Char(13)+\
-"Plain window"+String(Plain window))
-
-
 $window:=cs:C1710.Window.new()
 
 $window.Title("My Title")
-$window.Style(Plain form window:K39:10)
+$window.Style(Plain window:K34:13)
+
+$window.Position(FW Centre)
 
 $window.CloseBox(True:C214)
 
-$windowID_i:=$window.drawWindow()
+$WinRef_i:=$window.drawWindow()
 
-  //DIALOG("Dummy";New object("window";$window);*)
+$window.Dimensions(900;600)
+$window.drawWindow()  // Resize window
+
+DIALOG:C40("Dummy";New object:C1471("window";$window);*)
 
 $anotherWindow:=$window.copy()
 
@@ -24,15 +25,15 @@ $anotherWindow.Title("A Different Title")
 
 $title:=$window.Title()
 
-$anotherWindow.Dimensions(900;600)
+$anotherWindow.Dimensions(300;200)
 
-ARRAY LONGINT:C221($windows_ai;0)
-WINDOW LIST:C442($Windows_ai;*)
+$anotherWindow.Position(FW Center on Window)
 
-$window.Close()
+$AnotherWinRef_i:=$anotherWindow.drawWindow()
 
-$AnotherwindowID_i:=$anotherWindow.drawWindow()
+DIALOG:C40("Dummy";New object:C1471("window";$anotherWindow);*)
 
+CLOSE WINDOW:C154
 
-$anotherWindow.Close()
+CLOSE WINDOW:C154
 
