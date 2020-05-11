@@ -12,7 +12,6 @@ We don't deal with time zones here beyond using the built in string formats
 86400 = 24*60*60 = seconds in a day
 
 */
-
 Class extends Object
 
 Class constructor
