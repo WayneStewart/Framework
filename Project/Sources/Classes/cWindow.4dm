@@ -1,8 +1,15 @@
+/*
+Created by: Wayne Stewart
+ ------------------
+  General window routines
+
+*/
+
 Class extends cObject
 
 
 Class constructor
-	C_OBJECT:C1216($1)  // Sets up default values just in case
+	C_OBJECT:C1216($1)  // Sets up default values rather than have Nulls
 	If ($1.title#Null:C1517)
 		This:C1470.title:=$1.title
 	Else 

@@ -117,15 +117,15 @@ Function monthName
 			$0:="Novenber"
 		: ($month_l=12)
 			$0:="December"
-	End case
-
+	End case 
+	
 	  // --------------------------------------------------------
 Function monthNumFromName  //  takes a month name or abbrev
 	C_TEXT:C284($1;$month_t)
 	C_LONGINT:C283($0)
-
+	
 	$month_t:=Substring:C12($1;1;3)
-	Case of
+	Case of 
 		: ($month_t="jan")
 			$0:=1
 		: ($month_t="feb")
@@ -150,24 +150,24 @@ Function monthNumFromName  //  takes a month name or abbrev
 			$0:=11
 		: ($month_t="dec")
 			$0:=12
-	End case
-
+	End case 
+	
 Function firstOfMonth
 	C_DATE:C307($0)
-
+	
 	$0:=Add to date:C393(!00-00-00!;\
 		This:C1470.yearOf();\
 		This:C1470.monthOf();\
 		1)
-
+	
 Function lastOfMonth
 	C_DATE:C307($0)
-
+	
 	$0:=Add to date:C393(!00-00-00!;\
 		This:C1470.yearOf();\
 		This:C1470.monthOf()+1;\
 		1)-1
-
+	
 Function getEpoch
 /* the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT),
 not counting leap seconds (in ISO 8601: 1970-01-01T00:00:00Z).
@@ -175,109 +175,109 @@ Literally speaking the epoch is Unix time 0 (midnight 1/1/1970),
 but 'epoch' is often used as a synonym for 'Unix time'.*/
 	C_LONGINT:C283($0;$nDays)
 	$nDays:=(This:C1470.dateValue()-!1970-01-01!)
-
+	
 	$0:=(($nDays*86400)+((This:C1470.hour()-This:C1470.calcTimeZoneDiff())*3600)+(This:C1470.minute()*60)+This:C1470.second())
-
+	
 	  // --------------------------------------------------------
 Function strDate
 	C_TEXT:C284($0)
 	C_DATE:C307($value_d)
 	C_VARIANT:C1683($1)  //  longint|text
 	C_LONGINT:C283($format_l)
-
+	
 	$value_d:=Date:C102(This:C1470.dateValue())
-
-	Case of
+	
+	Case of 
 		: (Count parameters:C259=0)
 			$0:=(This:C1470.value)
-
+			
 		: (Value type:C1509($1)=Is longint:K8:6)
 			$format_l:=$1
-
-			Case of
+			
+			Case of 
 				: ($format_l=ISO date:K1:8) | ($format_l=ISO date GMT:K1:10)
 					$0:=String:C10($value_d;$format_l;Time:C179(This:C1470.timeValue))
-
+					
 				Else   // assume this is some time format
 					$0:=String:C10($value_d;$format_l)
-
-			End case
-
+					
+			End case 
+			
 		: (Value type:C1509($1)=Is text:K8:3)
-
-			Case of
+			
+			Case of 
 				: ($1="ISO") | ($1="yyyy-mm-dd") | ($1="simple")
 					$0:=This:C1470.value
-
+					
 				: ($1="system long")
 					$0:=String:C10($value_d;System date long:K1:3)+" at "+String:C10(Time:C179(This:C1470.timeValue);System time long:K7:11)
-
+					
 				: ($1="internal long")  // assume this is some time format
 					$0:=String:C10($value_d;Internal date long:K1:5)+" at "+String:C10(Time:C179(This:C1470.timeValue);System time short:K7:9)
-
+					
 				: ($1="rfc1123")
 					C_TEXT:C284($0)
 					$0:=Substring:C12(This:C1470.dayName();1;3)+" "+String:C10(Day of:C23($value_d);"00")+" "+Substring:C12(This:C1470.monthName();1;3)+" "+String:C10(Year of:C25($value_d))+" "+String:C10(Time:C179(This:C1470.timeValue);HH MM SS:K7:1)
-
+					
 				: ($1="simple")  //   Sept 14, 1967
 					C_TEXT:C284($0)
 					$0:=Substring:C12(This:C1470.monthName();1;4)+" "+String:C10(Day of:C23($value_d))+", "+String:C10(Year of:C25($value_d))
-
+					
 				: ($1="formal")  //   September 14, 1967
 					C_TEXT:C284($0)
 					$0:=This:C1470.monthName()+" "+String:C10(Day of:C23($value_d))+", "+String:C10(Year of:C25($value_d))
-
-			End case
-	End case
-
+					
+			End case 
+	End case 
+	
 	  // --------------------------------------------------------
 Function setDate  //  date | text | longint  ;  this is the primary input for the date
 	C_VARIANT:C1683($1)
 	This:C1470.setDateValue(This:C1470.calcDate($1))
-
+	
 	  // --------------------------------------------------------
 Function calcDate  //  text | date | longint   ;return a date value for the input expression
 	C_VARIANT:C1683($1)
 	C_DATE:C307($0)
-
-	Case of
+	
+	Case of 
 		: (Value type:C1509($1)=Is date:K8:7)
 			$0:=$1
-
+			
 		: (Value type:C1509($1)=Is longint:K8:6)  //  $1 is number of days since pivotDate (!1/1/1970!)// UNIX epoch
 			If (This:C1470.pivotDate=Null:C1517)
 				$0:=Add to date:C393(!1900-01-01!;$1;0;0)
-			Else
+			Else 
 				$0:=Add to date:C393(This:C1470.pivotDate;$1;0;0)
-			End if
-
+			End if 
+			
 		: (Value type:C1509($1)=Is text:K8:3)
 			C_TEXT:C284($cDateRaw_t;$Pattern_MM_DD_YY_t;$month_t)
 			ARRAY LONGINT:C221($aPos;0)
 			ARRAY LONGINT:C221($aLen;0)
-
+			
 			$cDateRaw_t:=$1
-
-			Case of
+			
+			Case of 
 				: ($cDateRaw_t="")
-
+					
 				: (Match regex:C1019("\\d{1,2}/\\d{1,2}/\\d{2,4}";$cDateRaw_t;1))
 					$0:=Date:C102($cDateRaw_t)
-
+					
 				: (Match regex:C1019("(\\d\\d\\d\\d?)-(\\d\\d?)-(\\d\\d?)T(\\d\\d:\\d\\d:\\d\\d)";$cDateRaw_t;1;$aPos;$aLen))  // ISO date
 					$0:=Add to date:C393(!00-00-00!;\
 						Num:C11(Substring:C12($cDateRaw_t;$aPos{1};$aLen{1}));\
 						Num:C11(Substring:C12($cDateRaw_t;$aPos{2};$aLen{2}));\
 						Num:C11(Substring:C12($cDateRaw_t;$aPos{3};$aLen{3})))
-
+					
 					Super:C1706.setTime(Substring:C12($cDateRaw_t;$aPos{4};$aLen{4}))
-
+					
 				: (Match regex:C1019("(\\d\\d\\d\\d?-\\d\\d?-\\d\\d?)";$cDateRaw_t;1;$aPos;$aLen))  // ISO date
 					$0:=Add to date:C393(!00-00-00!;\
 						Num:C11(Substring:C12($cDateRaw_t;$aPos{1};$aLen{1}));\
 						Num:C11(Substring:C12($cDateRaw_t;$aPos{2};$aLen{2}));\
 						Num:C11(Substring:C12($cDateRaw_t;$aPos{3};$aLen{3})))
-
+					
 				: (Match regex:C1019("(?i)(\\w+),? (\\w+) (\\d\\d?),? (\\d\\d\\d\\d?) [@at]+ (\\d\\d:\\d\\d:\\d\\d ?\\w\\w)?";$cDateRaw_t;1;$aPos;$aLen))
 /* eg. Excel export value like this:
 1         2    3   4         5
@@ -288,22 +288,45 @@ Tuesday, April 10, 2018 at 00:00:00    --  24 hour time
 						Num:C11(Substring:C12($cDateRaw_t;$aPos{4};$aLen{4}));\
 						This:C1470.monthNumFromName(Substring:C12($cDateRaw_t;$aPos{2};$aLen{2}));\
 						Num:C11(Substring:C12($cDateRaw_t;$aPos{3};$aLen{3})))
-
+					
 					Super:C1706.setTime(Substring:C12($cDateRaw_t;$aPos{5};$aLen{5}))
-
+					
 				: (Match regex:C1019("(?i)(\\w+) (\\d\\d?),? (\\d\\d\\d\\d)";$cDateRaw_t;1;$aPos;$aLen))  //    September 14, 1864
 					$0:=Add to date:C393(!00-00-00!;\
 						Num:C11(Substring:C12($cDateRaw_t;$aPos{3};$aLen{3}));\
 						This:C1470.monthNumFromName(Substring:C12($cDateRaw_t;$aPos{1};$aLen{1}));\
 						Num:C11(Substring:C12($cDateRaw_t;$aPos{2};$aLen{2})))
-
-				Else
-
-
-			End case
-	End case
-
+					
+				Else 
+					
+					
+			End case 
+	End case 
+	
 Function setDateValue  //  writes a date value to This.value
 	C_DATE:C307($1)
 	This:C1470.value:=Substring:C12(String:C10($1;ISO date:K1:8);1;10)
-
+	
+	
+	  // --------------------------------------------------------
+Function Easter  // Returns the date of Easter Sunday for this year
+	  // Based on John Conway’s Doomsday rules
+	$year_i:=This:C1470.yearOf()
+	$G:=(($year_i%19)+1)-1
+	$I:=((19*$G)+15)%30
+	$C:=($year_i\100)
+	
+	$H:=($C-($C\4)-(((8*$C)+13)\25)+(19*$G)+15)%30
+	$I:=$H-(($H\28)*(1-((29\($H+1))*((21-$G)\11))))
+	$J:=($year_i+($year_i\4)+$I+2-$C+($C\4))%7
+	$L:=$I-$J
+	$month_i:=3+(($L+40)\44)
+	$day_i:=$L+28-(31*($month_i\4))
+	
+	$0:=Add to date:C393(!1900-01-01!;$year_i-1900;$month_i-1;$day_i-1)
+	
+	
+	
+	
+	
+	
