@@ -1,39 +1,42 @@
 //%attributes = {}
-C_OBJECT:C1216($window)
-C_TEXT:C284($title)
+  //C_OBJECT($window)
+  //C_TEXT($title)
 
 
-$window:=cs:C1710.Window.new()
+  //$window:=cs.Window.new()
 
-$window.Title("My Title")
-$window.Style(Plain window:K34:13)
+  //$window.Title("My Title")
+  //$window.Style(Plain window)
 
-$window.Position(FW Centre)
+  //$window.Position(FW Centre)
 
-$window.CloseBox(True:C214)
+  //$window.CloseBox(True)
 
-$WinRef_i:=$window.drawWindow()
+  //$WinRef_i:=$window.drawWindow()
 
-$window.Dimensions(900;600)
-$window.drawWindow()  // Resize window
+  //$window.Dimensions(900;600)
+  //$window.drawWindow()  // Resize window
 
-DIALOG:C40("Dummy";New object:C1471("window";$window);*)
+  //DIALOG("Dummy";New object("window";$window);*)
 
-$anotherWindow:=$window.copy()
+  //$anotherWindow:=$window.copy()
 
-$anotherWindow.Title("A Different Title")
+  //$anotherWindow.Title("A Different Title")
 
-$title:=$window.Title()
+  //$title:=$window.Title()
 
-$anotherWindow.Dimensions(300;200)
+  //$anotherWindow.Dimensions(300;200)
 
-$anotherWindow.Position(FW Center on Window)
+  //$anotherWindow.Position(FW Center on Window)
 
-$AnotherWinRef_i:=$anotherWindow.drawWindow()
+  //$AnotherWinRef_i:=$anotherWindow.drawWindow()
 
-DIALOG:C40("Dummy";New object:C1471("window";$anotherWindow);*)
+  //DIALOG("Dummy";New object("window";$anotherWindow);*)
 
-CLOSE WINDOW:C154
+  //CLOSE WINDOW
 
-CLOSE WINDOW:C154
+  //CLOSE WINDOW
 
+
+$date:=cs:C1710.date_.new()
+$theSameDate:=$date.copy()

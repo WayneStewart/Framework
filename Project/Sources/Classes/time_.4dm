@@ -14,6 +14,8 @@ We don't deal with time zones here beyond using the built in string formats
 */
 Class extends Object
 
+Class extends Object
+
 Class constructor
 	C_VARIANT:C1683($1)
 	This:C1470.timeValue:=Current time:C178
