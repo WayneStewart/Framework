@@ -38,5 +38,5 @@
   //CLOSE WINDOW
 
 
-$date:=cs:C1710.date_.new()
+$date:=cs:C1710.cDate.new()
 $theSameDate:=$date.copy()

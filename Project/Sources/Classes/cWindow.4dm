@@ -1,4 +1,4 @@
-Class extends Object
+Class extends cObject
 
 
 Class constructor
