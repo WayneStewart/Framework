@@ -10,61 +10,61 @@ Class extends cTime
 
 Class constructor
 	C_VARIANT:C1683($1;$2)
-
+	
 	Super:C1705()
 	This:C1470.value:=""
-
+	
 	If (Count parameters:C259=2)
 		Super:C1706.setTime($2)
-	Else
+	Else 
 		Super:C1706.setTime("12:00:00")
-	End if
-
+	End if 
+	
 	If (Count parameters:C259>0)
 		This:C1470.setDateValue($1)
-	Else
+	Else 
 		This:C1470.setDateValue(Current date:C33)
-	End if
-
+	End if 
+	
 	  // ============================================================
 Function dateValue  //     return the date value
 	C_BOOLEAN:C305($1;$useGMT)
 	C_DATE:C307($0)
-
+	
 	If (Count parameters:C259=1)
 		$useGMT:=$1
-	End if
-
+	End if 
+	
 	If ($useGMT)
-
-	Else
+		
+	Else 
 		$0:=Date:C102(This:C1470.value+"T"+Super:C1706.strTime())
-	End if
-
+	End if 
+	
 Function yearOf
 	C_LONGINT:C283($0)
 	$0:=Year of:C25(This:C1470.dateValue())
-
+	
 Function monthOf
 	C_LONGINT:C283($0)
 	$0:=Month of:C24(This:C1470.dateValue())
-
+	
 Function dayOf
 	C_LONGINT:C283($0)
 	$0:=Day of:C23(This:C1470.dateValue())
-
+	
 	  // --------------------------------------------------------
 Function dayName  //  get the name of a day or value date
 	C_LONGINT:C283($1;$day_l)
 	C_TEXT:C284($0)
-
+	
 	If (Count parameters:C259>0)
 		$day_l:=$1
-	Else
+	Else 
 		$day_l:=Day number:C114(This:C1470.dateValue())
-	End if
-
-	Case of
+	End if 
+	
+	Case of 
 		: ($day_l=1)
 			$0:="Sunday"
 		: ($day_l=2)
@@ -79,20 +79,20 @@ Function dayName  //  get the name of a day or value date
 			$0:="Friday"
 		: ($day_l=7)
 			$0:="Saturday"
-	End case
-
+	End case 
+	
 	  // --------------------------------------------------------
 Function monthName
 	C_LONGINT:C283($1;$month_l)
 	C_TEXT:C284($0)
-
+	
 	If (Count parameters:C259>0)
 		$month_l:=$1
-	Else
+	Else 
 		$month_l:=Month of:C24(This:C1470.dateValue())
-	End if
-
-	Case of
+	End if 
+	
+	Case of 
 		: ($month_l=1)
 			$0:="January"
 		: ($month_l=2)
