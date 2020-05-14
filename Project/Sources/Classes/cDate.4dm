@@ -307,9 +307,10 @@ Function setDateValue  //  writes a date value to This.value
 	C_DATE:C307($1)
 	This:C1470.value:=Substring:C12(String:C10($1;ISO date:K1:8);1;10)
 	
-	
 	  // --------------------------------------------------------
 Function Easter  // Returns the date of Easter Sunday for this year
+	  // http://4d.1045681.n5.nabble.com/Date-Routines-td1418965.html
+	  // Paul Mohammadi
 	  // Based on John Conway’s Doomsday rules
 	$year_i:=This:C1470.yearOf()
 	$G:=(($year_i%19)+1)-1

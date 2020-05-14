@@ -1,5 +1,4 @@
 ﻿{
-	"(Folder_1)": {},
 	"Constants (Cannon Smith)": {
 		"methods": [
 			"Compiler_Constants",
@@ -24,9 +23,5 @@
 	"Default Forms": {},
 	"Default Project Methods": {},
 	"Default Tables": {},
-	"trash": {
-		"groups": [
-			"(Folder_1)"
-		]
-	}
+	"trash": {}
 }
