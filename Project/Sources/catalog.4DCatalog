@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
-<base name="" uuid="6ABF9C4E9396469691410C34B781BDD9" collation_locale="en-au">
+<base name="Framework" uuid="6ABF9C4E9396469691410C34B781BDD9" collation_locale="en-au">
 	<schema name="DEFAULT_SCHEMA"/>
+	<base_extra __stringCompHash="icu:63.1.0" __keywordBuildingHash="icu:63.1.0"/>
 </base>
