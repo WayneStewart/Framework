@@ -1,0 +1,515 @@
+{
+	"destination": "detailScreen",
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"menuBar": "Barre #1",
+	"markerHeader": 15,
+	"markerBody": 200,
+	"markerBreak": 240,
+	"markerFooter": 240,
+	"events": [
+		"onLoad",
+		"onTimer",
+		"onPageChange"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "A4",
+		"paperWidth": "842pt",
+		"paperHeight": "595pt"
+	},
+	"pages": [
+		{
+			"objects": {
+				"Tab Control": {
+					"type": "tab",
+					"top": 20,
+					"left": 20,
+					"width": 1240,
+					"height": 680,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"dataSource": "_TabTitles",
+					"dataSourceTypeHint": "arrayText",
+					"action": "gotoPage",
+					"events": [
+						"onClick"
+					],
+					"labels": [
+						"Info",
+						"Teacher Class",
+						"Student Class"
+					]
+				}
+			}
+		},
+		{
+			"objects": {
+				"Static Picture2": {
+					"type": "picture",
+					"top": 62,
+					"left": 40,
+					"width": 1200,
+					"height": 618,
+					"picture": "/RESOURCES/diagram.png"
+				},
+				"Text": {
+					"type": "text",
+					"text": "In this example, we'll see how inheritance works. We have two classes, Student and Teacher who inherit from the Person class.",
+					"top": 79,
+					"left": 55,
+					"width": 339,
+					"height": 182,
+					"fontSize": 18
+				}
+			}
+		},
+		{
+			"objects": {
+				"information1": {
+					"type": "text",
+					"top": 80,
+					"left": 40,
+					"width": 641,
+					"height": 17,
+					"sizingX": "grow",
+					"text": "1. Enter the information and create an instance of the Teacher class:",
+					"fontWeight": "bold"
+				},
+				"information2": {
+					"type": "text",
+					"top": 250,
+					"left": 40,
+					"width": 641,
+					"height": 17,
+					"sizingX": "grow",
+					"text": "2. Retrieve the full name of the teacher with the getFullName function:",
+					"fontWeight": "bold"
+				},
+				"information3": {
+					"type": "text",
+					"top": 360,
+					"left": 40,
+					"width": 641,
+					"height": 17,
+					"sizingX": "grow",
+					"text": "3. Retrieve the identity of the teacher, (full name and subject), with the getIdentity function:",
+					"fontWeight": "bold"
+				},
+				"TextFirstname": {
+					"type": "text",
+					"text": "First name:",
+					"top": 110,
+					"left": 40,
+					"width": 100,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"TextLastname": {
+					"type": "text",
+					"text": "Last name:",
+					"top": 140,
+					"left": 40,
+					"width": 100,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"TextBirthdate": {
+					"type": "text",
+					"text": "Birthdate:",
+					"top": 170,
+					"left": 40,
+					"width": 100,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"InputFirstname": {
+					"type": "input",
+					"left": 150,
+					"top": 110,
+					"width": 150,
+					"height": 17,
+					"defaultValue": "",
+					"dataSource": "Form:C1466.firstname"
+				},
+				"InputLastname": {
+					"type": "input",
+					"left": 150,
+					"top": 140,
+					"width": 150,
+					"height": 17,
+					"dataSource": "Form:C1466.lastname"
+				},
+				"InputBirthdate": {
+					"type": "input",
+					"left": 150,
+					"top": 170,
+					"width": 150,
+					"height": 17,
+					"dataSource": "Form:C1466.birthdate",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "systemMedium"
+				},
+				"ButtonCreate": {
+					"type": "button",
+					"text": "Create an instance of Teacher",
+					"top": 110,
+					"left": 364,
+					"width": 205,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Button.4dm"
+				},
+				"ButtonFullname": {
+					"type": "button",
+					"text": "Compute full name",
+					"top": 280,
+					"left": 95,
+					"width": 205,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Button1.4dm"
+				},
+				"ButtonIdentity": {
+					"type": "button",
+					"text": "Compute identity",
+					"top": 390,
+					"left": 95,
+					"width": 205,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Button2.4dm"
+				},
+				"InputFullname": {
+					"type": "input",
+					"left": 364,
+					"top": 283,
+					"width": 317,
+					"height": 17,
+					"dataSource": "Form:C1466.fullname",
+					"enterable": false,
+					"sizingX": "grow"
+				},
+				"InputIdentity": {
+					"type": "input",
+					"left": 364,
+					"top": 393,
+					"width": 317,
+					"height": 17,
+					"dataSource": "Form:C1466.identity",
+					"enterable": false,
+					"sizingX": "grow"
+				},
+				"TextFormuleAge": {
+					"type": "text",
+					"text": "identity:=oTeacher.getIdentity()",
+					"top": 420,
+					"left": 95,
+					"width": 205,
+					"height": 16
+				},
+				"TextFormuleFullname": {
+					"type": "text",
+					"text": "fullname:=oTeacher.getFullName()",
+					"top": 310,
+					"left": 95,
+					"width": 217,
+					"height": 16
+				},
+				"Check Box": {
+					"type": "checkbox",
+					"text": "Trace",
+					"top": 451,
+					"left": 600,
+					"width": 84,
+					"height": 19,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "nTrace",
+					"sizingX": "move",
+					"sizingY": "move"
+				},
+				"TextSubject": {
+					"type": "text",
+					"text": "Subject:",
+					"top": 200,
+					"left": 40,
+					"width": 100,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"InputSubject": {
+					"type": "input",
+					"left": 150,
+					"top": 200,
+					"width": 150,
+					"height": 17,
+					"dataSource": "Form:C1466.subject",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "systemMedium"
+				},
+				"TextFormuleConstructor": {
+					"type": "text",
+					"text": "oTeacher:=cs.Teacher.new(firstname; lastname; birthdate; subject)",
+					"top": 141,
+					"left": 364,
+					"width": 317,
+					"height": 31
+				}
+			},
+			"entryOrder": [
+				"InputFirstname",
+				"InputLastname",
+				"InputBirthdate",
+				"ButtonCreate",
+				"ButtonFullname",
+				"ButtonIdentity",
+				"InputFullname",
+				"InputIdentity",
+				"Check Box",
+				"InputSubject"
+			]
+		},
+		{
+			"objects": {
+				"information4": {
+					"type": "text",
+					"top": 80,
+					"left": 40,
+					"width": 641,
+					"height": 17,
+					"sizingX": "grow",
+					"text": "1. Enter the information and create an instance of the Student class",
+					"fontWeight": "bold"
+				},
+				"information5": {
+					"type": "text",
+					"top": 270,
+					"left": 40,
+					"width": 641,
+					"height": 17,
+					"sizingX": "grow",
+					"text": "2. Retrieve the full name of the Student with the getFullName function",
+					"fontWeight": "bold"
+				},
+				"information6": {
+					"type": "text",
+					"top": 380,
+					"left": 40,
+					"width": 641,
+					"height": 17,
+					"sizingX": "grow",
+					"text": "3. Compute the identity of the student, (name, grade and school) with the getIdentity function",
+					"fontWeight": "bold"
+				},
+				"TextFirstname1": {
+					"type": "text",
+					"text": "First name:",
+					"top": 110,
+					"left": 40,
+					"width": 100,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"TextLastname1": {
+					"type": "text",
+					"text": "Last name:",
+					"top": 140,
+					"left": 40,
+					"width": 100,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"TextBirthdate1": {
+					"type": "text",
+					"text": "Birthdate:",
+					"top": 170,
+					"left": 40,
+					"width": 100,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"InputFirstname1": {
+					"type": "input",
+					"left": 150,
+					"top": 110,
+					"width": 150,
+					"height": 17,
+					"defaultValue": "",
+					"dataSource": "Form:C1466.firstname"
+				},
+				"InputLastname1": {
+					"type": "input",
+					"left": 150,
+					"top": 140,
+					"width": 150,
+					"height": 17,
+					"dataSource": "Form:C1466.lastname"
+				},
+				"InputBirthdate1": {
+					"type": "input",
+					"left": 150,
+					"top": 170,
+					"width": 150,
+					"height": 17,
+					"dataSource": "Form:C1466.birthdate",
+					"dataSourceTypeHint": "date",
+					"dateFormat": "systemMedium"
+				},
+				"ButtonCreate1": {
+					"type": "button",
+					"text": "Create an instance of Student",
+					"top": 110,
+					"left": 364,
+					"width": 205,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/ButtonCreate1.4dm"
+				},
+				"ButtonFullname2": {
+					"type": "button",
+					"text": "Compute full name",
+					"top": 300,
+					"left": 95,
+					"width": 205,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/ButtonFullname2.4dm"
+				},
+				"ButtonIdentity2": {
+					"type": "button",
+					"text": "Compute identity",
+					"top": 410,
+					"left": 95,
+					"width": 205,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/ButtonIdentity2.4dm"
+				},
+				"InputFullname1": {
+					"type": "input",
+					"left": 364,
+					"top": 303,
+					"width": 317,
+					"height": 17,
+					"dataSource": "Form:C1466.fullname",
+					"enterable": false,
+					"sizingX": "grow"
+				},
+				"InputIdentity1": {
+					"type": "input",
+					"left": 364,
+					"top": 413,
+					"width": 317,
+					"height": 17,
+					"dataSource": "Form:C1466.identity",
+					"enterable": false,
+					"sizingX": "grow"
+				},
+				"TextFormuleAge1": {
+					"type": "text",
+					"text": "identity:=oStudent.getIdentity()",
+					"top": 440,
+					"left": 95,
+					"width": 205,
+					"height": 16
+				},
+				"TextFormuleFullname1": {
+					"type": "text",
+					"text": "fullname:=oStudent.getFullName()",
+					"top": 330,
+					"left": 95,
+					"width": 217,
+					"height": 16
+				},
+				"Check Box1": {
+					"type": "checkbox",
+					"text": "Trace",
+					"top": 451,
+					"left": 600,
+					"width": 84,
+					"height": 19,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "nTrace",
+					"sizingX": "move",
+					"sizingY": "move"
+				},
+				"TextSubject1": {
+					"type": "text",
+					"text": "Grade:",
+					"top": 200,
+					"left": 40,
+					"width": 100,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"InputSubject1": {
+					"type": "input",
+					"left": 150,
+					"top": 200,
+					"width": 150,
+					"height": 17,
+					"dataSource": "Form:C1466.grade",
+					"dataSourceTypeHint": "text"
+				},
+				"TextSubject2": {
+					"type": "text",
+					"text": "School name:",
+					"top": 230,
+					"left": 40,
+					"width": 100,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"InputSubject2": {
+					"type": "input",
+					"left": 150,
+					"top": 230,
+					"width": 150,
+					"height": 17,
+					"dataSource": "Form:C1466.school",
+					"dataSourceTypeHint": "text"
+				},
+				"TextFormuleConstructor2": {
+					"type": "text",
+					"text": "oStudent:=cs.Student.new(firstname; lastname; birthdate; school; grade)",
+					"top": 141,
+					"left": 364,
+					"width": 317,
+					"height": 31
+				}
+			}
+		}
+	],
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowMinWidth": 720,
+	"windowMinHeight": 510,
+	"geometryStamp": 57,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}

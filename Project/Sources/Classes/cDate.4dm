@@ -1,6 +1,7 @@
 /*  cDate ([text/date/real/long])
 $1: some date value
  Created by: Kirk as Designer, Created: 05/09/20, 16:08:52
+ Extensions: Wayne Stewart
  ------------------
 VALUES
 This.value is a string: yyyy-mm-dd for as much as is known
@@ -17,7 +18,7 @@ Class constructor
 	If (Count parameters:C259=2)
 		Super:C1706.setTime($2)
 	Else 
-		Super:C1706.setTime("12:00:00")
+		Super:C1706.setTime(Current time:C178)
 	End if 
 	
 	If (Count parameters:C259>0)
@@ -26,34 +27,33 @@ Class constructor
 		This:C1470.setDateValue(Current date:C33)
 	End if 
 	
-	  // ============================================================
+	// ============================================================
 Function dateValue  //     return the date value
-	C_BOOLEAN:C305($1;$useGMT)
+	
 	C_DATE:C307($0)
+	$0:=Date:C102(This:C1470.value)  //+"T"+Super.strTime())
 	
-	If (Count parameters:C259=1)
-		$useGMT:=$1
-	End if 
+Function getDate()->$theDate : Date
+	var $year_i;$month_i;$day_i : Integer
+	$year_i:=Num:C11(Substring:C12(This:C1470.value;1;4))
+	$month_i:=Num:C11(Substring:C12(This:C1470.value;6;2))
+	$day_i:=Num:C11(Substring:C12(This:C1470.value;9;2))
+	$theDate:=Add to date:C393(!1900-01-01!;$year_i-1900;$month_i-1;$day_i-1)
 	
-	If ($useGMT)
-		
-	Else 
-		$0:=Date:C102(This:C1470.value+"T"+Super:C1706.strTime())
-	End if 
 	
 Function yearOf
 	C_LONGINT:C283($0)
-	$0:=Year of:C25(This:C1470.dateValue())
+	$0:=Year of:C25(This:C1470.getDate())
 	
 Function monthOf
 	C_LONGINT:C283($0)
-	$0:=Month of:C24(This:C1470.dateValue())
+	$0:=Month of:C24(This:C1470.getDate())
 	
 Function dayOf
 	C_LONGINT:C283($0)
-	$0:=Day of:C23(This:C1470.dateValue())
+	$0:=Day of:C23(This:C1470.getDate())
 	
-	  // --------------------------------------------------------
+	// --------------------------------------------------------
 Function dayName  //  get the name of a day or value date
 	C_LONGINT:C283($1;$day_l)
 	C_TEXT:C284($0)
@@ -61,7 +61,7 @@ Function dayName  //  get the name of a day or value date
 	If (Count parameters:C259>0)
 		$day_l:=$1
 	Else 
-		$day_l:=Day number:C114(This:C1470.dateValue())
+		$day_l:=Day number:C114(This:C1470.getDate())
 	End if 
 	
 	Case of 
@@ -81,7 +81,7 @@ Function dayName  //  get the name of a day or value date
 			$0:="Saturday"
 	End case 
 	
-	  // --------------------------------------------------------
+	// --------------------------------------------------------
 Function monthName
 	C_LONGINT:C283($1;$month_l)
 	C_TEXT:C284($0)
@@ -89,7 +89,7 @@ Function monthName
 	If (Count parameters:C259>0)
 		$month_l:=$1
 	Else 
-		$month_l:=Month of:C24(This:C1470.dateValue())
+		$month_l:=Month of:C24(This:C1470.getDate())
 	End if 
 	
 	Case of 
@@ -119,7 +119,7 @@ Function monthName
 			$0:="December"
 	End case 
 	
-	  // --------------------------------------------------------
+	// --------------------------------------------------------
 Function monthNumFromName  //  takes a month name or abbrev
 	C_TEXT:C284($1;$month_t)
 	C_LONGINT:C283($0)
@@ -174,18 +174,18 @@ not counting leap seconds (in ISO 8601: 1970-01-01T00:00:00Z).
 Literally speaking the epoch is Unix time 0 (midnight 1/1/1970),
 but 'epoch' is often used as a synonym for 'Unix time'.*/
 	C_LONGINT:C283($0;$nDays)
-	$nDays:=(This:C1470.dateValue()-!1970-01-01!)
+	$nDays:=(This:C1470.getDate()-!1970-01-01!)
 	
 	$0:=(($nDays*86400)+((This:C1470.hour()-This:C1470.calcTimeZoneDiff())*3600)+(This:C1470.minute()*60)+This:C1470.second())
 	
-	  // --------------------------------------------------------
+	// --------------------------------------------------------
 Function strDate
 	C_TEXT:C284($0)
 	C_DATE:C307($value_d)
 	C_VARIANT:C1683($1)  //  longint|text
 	C_LONGINT:C283($format_l)
 	
-	$value_d:=Date:C102(This:C1470.dateValue())
+	$value_d:=Date:C102(This:C1470.getDate())
 	
 	Case of 
 		: (Count parameters:C259=0)
@@ -230,12 +230,12 @@ Function strDate
 			End case 
 	End case 
 	
-	  // --------------------------------------------------------
+	// --------------------------------------------------------
 Function setDate  //  date | text | longint  ;  this is the primary input for the date
 	C_VARIANT:C1683($1)
 	This:C1470.setDateValue(This:C1470.calcDate($1))
 	
-	  // --------------------------------------------------------
+	// --------------------------------------------------------
 Function calcDate  //  text | date | longint   ;return a date value for the input expression
 	C_VARIANT:C1683($1)
 	C_DATE:C307($0)
@@ -307,11 +307,11 @@ Function setDateValue  //  writes a date value to This.value
 	C_DATE:C307($1)
 	This:C1470.value:=Substring:C12(String:C10($1;ISO date:K1:8);1;10)
 	
-	  // --------------------------------------------------------
+	// --------------------------------------------------------
 Function Easter  // Returns the date of Easter Sunday for this year
-	  // http://4d.1045681.n5.nabble.com/Date-Routines-td1418965.html
-	  // Paul Mohammadi
-	  // Based on John Conway’s Doomsday rules
+	// http://4d.1045681.n5.nabble.com/Date-Routines-td1418965.html
+	// Paul Mohammadi
+	// Based on John Conway’s Doomsday rules
 	$year_i:=This:C1470.yearOf()
 	$G:=(($year_i%19)+1)-1
 	$I:=((19*$G)+15)%30
@@ -325,6 +325,48 @@ Function Easter  // Returns the date of Easter Sunday for this year
 	$day_i:=$L+28-(31*($month_i\4))
 	
 	$0:=Add to date:C393(!1900-01-01!;$year_i-1900;$month_i-1;$day_i-1)
+	
+	
+Function addToDate($year : Integer;$month : Integer;$day : Integer)
+	var $thisDate : Date
+	$thisDate:=Date:C102(This:C1470.getDate())
+	$thisDate:=Add to date:C393($thisDate;$year;$month;$day)
+	This:C1470.value:=Substring:C12(String:C10($thisDate;ISO date:K1:8);1;10)
+	
+Function addDay($numberOfDays : Integer)
+	If (Count parameters:C259=0)
+		This:C1470.addToDate(0;0;1)  // add 1 day
+	Else 
+		This:C1470.addToDate(0;0;$numberOfDays)  // add n days
+	End if 
+	
+Function addMonth($numberOfMonths : Integer)
+	If (Count parameters:C259=0)
+		This:C1470.addToDate(0;1;0)  // add 1 month
+	Else 
+		This:C1470.addToDate(0;$numberOfMonths;0)  // add n months
+	End if 
+	
+Function addYear($numberOfYears : Integer)
+	
+	If (Count parameters:C259=0)
+		This:C1470.addToDate(1;0;0)  // add 1 year
+	Else 
+		This:C1470.addToDate($numberOfYears;0;0)  // add n years
+	End if 
+	
+Function isAfter($comparisonDate : cs:C1710.cDate)->$result : Boolean
+	$result:=(This:C1470.value>$comparisonDate.value)\
+		 | ((This:C1470.value=$comparisonDate.value) & (This:C1470.timeValue>$comparisonDate.timeValue))
+	
+Function isBefore($comparisonDate : cs:C1710.cDate)->$result : Boolean
+	$result:=Not:C34(This:C1470.isAfter($comparisonDate))
+	
+Function isEqualTo($comparisonDate : cs:C1710.cDate)->$result : Boolean
+	$result:=(This:C1470.value=$comparisonDate.value)\
+		 & (This:C1470.timeValue=$comparisonDate.timeValue)
+	
+	
 	
 	
 	

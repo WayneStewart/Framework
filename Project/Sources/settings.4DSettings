@@ -1,12 +1,18 @@
-﻿<?xml version="1.0" encoding="UTF-8"?><preferences stamp="5">
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="6">
 	<com.4d>
 		<database>
 			<data_storage allow_data_read_only="true"/>
 			<cache flush_buffer_delay="20s" size_reserved="512"/>
+			<misc mac_use_lf="true" no_bom="false"/>
 		</database>
 		<general allow_user_settings="false" execute_host_database_event="true"/>
 		<interface>
 			<user can_change_password="true"/>
 		</interface>
+		<server>
+			<network>
+				<options use_legacy_network_layer="false"/>
+			</network>
+		</server>
 	</com.4d>
 </preferences>

@@ -5,8 +5,6 @@ Created by: Wayne Stewart
 
 */
 
-Class extends cObject
-
 
 Class constructor
 	C_OBJECT:C1216($1)  // Sets up default values rather than have Nulls
@@ -62,19 +60,17 @@ Function Title
 	End if 
 	$0:=This:C1470.title
 	
-Function Style
-	C_LONGINT:C283($1;$0)
+Function windowStyle($windowStyle : Integer)->$result : Integer
 	If (Count parameters:C259=1)
-		This:C1470.style:=$1
+		This:C1470.style:=$windowStyle
 	End if 
-	$0:=This:C1470.style
+	$result:=This:C1470.style
 	
-Function CloseBox
-	C_BOOLEAN:C305($1;$0)
+Function setCloseBox($useCloseBox : Boolean)->$result : Boolean
 	If (Count parameters:C259=1)
-		This:C1470.closeBox:=$1
+		This:C1470.closeBox:=$useCloseBox
 	End if 
-	$0:=This:C1470.closeBox
+	$result:=This:C1470.closeBox
 	
 Function Dimensions
 	C_LONGINT:C283($1;$2)
@@ -122,19 +118,19 @@ Function drawWindow
 			
 	End case 
 	
-	  // Now draw the window
+	// Now draw the window
 	If (This:C1470.windowReferenceNumber=Null:C1517)  // If it doesn't exist open it
 		This:C1470.windowReferenceNumber:=Open window:C153($Wnd_Left_i;$Wnd_Top_i;$Wnd_Right_i;$Wnd_Bottom_i;This:C1470.style;"";"WindowCloseBox")
 		SET WINDOW TITLE:C213(This:C1470.title)
 	Else 
-		  // If it does exist move it
+		// If it does exist move it
 		GET WINDOW RECT:C443($Wnd_Left_i;$Wnd_Top_i;$Wnd_Right_i;$Wnd_Bottom_i;This:C1470.windowReferenceNumber)
 		$Wnd_Right_i:=$Wnd_Left_i+This:C1470.width
 		$Wnd_Bottom_i:=$Wnd_Top_i+This:C1470.height
 		SET WINDOW RECT:C444($Wnd_Left_i;$Wnd_Top_i;$Wnd_Right_i;$Wnd_Bottom_i;This:C1470.windowReferenceNumber)
 	End if 
 	
-	  // Return the window ID as a number
+	// Return the window ID as a number
 	$0:=This:C1470.windowReferenceNumber
 	
 Function copy
