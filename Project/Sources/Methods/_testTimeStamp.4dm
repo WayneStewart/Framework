@@ -1,9 +1,11 @@
 //%attributes = {}
-var d1;d2;d3 : cs:C1710.cTimeStamp
+// Test modified timestamp routines
 
-d1:=cs:C1710.cTimeStamp.new()
-d2:=cs:C1710.cTimeStamp.new(Current date:C33)
-d3:=cs:C1710.cTimeStamp.new(Current date:C33;Current time:C178)
+var d1;d2;d3 : cs:C1710.cDate
+
+d1:=cs:C1710.cDate.new()
+d2:=cs:C1710.cDate.new(Current date:C33)
+d3:=cs:C1710.cDate.new(Current date:C33;Current time:C178)
 
 ASSERT:C1129(d1.isEqualTo(d2);"d1 == d2")
 
@@ -26,9 +28,9 @@ d2.addDay()
 d3.addYear()
 d3.setTime(Current time:C178)
 
-ALERT:C41(d1.toString())
-ALERT:C41(d2.toString(Internal date short special:K1:4))
+ALERT:C41(d1.strDate())
+ALERT:C41(d2.strDate(Internal date short special:K1:4))
 
-ALERT:C41(d3.toString())
-ALERT:C41(d3.iso())  // ISO format
-ALERT:C41(d3.rfc())  // RFC format
+ALERT:C41(d3.strDate())
+ALERT:C41(d3.strDate(ISO date:K1:8))  // ISO format
+ALERT:C41(d3.strDate(ISO date GMT:K1:10))  // GMT format

@@ -18,11 +18,20 @@ Class constructor
 	If (Count parameters:C259=2)
 		Super:C1706.setTime($2)
 	Else 
-		Super:C1706.setTime(Current time:C178)
+		Super:C1706.setTime(?00:00:00?)
 	End if 
 	
 	If (Count parameters:C259>0)
-		This:C1470.setDateValue($1)
+		If (Value type:C1509($1)=Is text:K8:3)
+			If ($1="timestamp")
+				This:C1470.setDateValue(Current date:C33)
+				Super:C1706.setTime(Current time:C178)
+			Else 
+				This:C1470.setDateValue($1)
+			End if 
+		Else 
+			This:C1470.setDateValue($1)
+		End if 
 	Else 
 		This:C1470.setDateValue(Current date:C33)
 	End if 
