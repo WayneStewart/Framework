@@ -1,24 +1,39 @@
 //%attributes = {}
 // Demo
-// Created by Wayne Stewart (2021-09-27T14:00:00Z)
+// Created by Wayne Stewart (2021-09-29T14:00:00Z)
 //  Method is an autostart type
 //     wayne@4dsupport.guru
 // ----------------------------------------------------
 
-C_LONGINT:C283($ProcessID_i;$StackSize_i;$WindowID_i)
-C_TEXT:C284($Form_t;$DesiredProcessName_t)
+var $ProcessID_i;$StackSize_i;$WindowID_i;$month_i : Integer
+var $formName_t;$DesiredProcessName_t : Text
+var $Form_o : Object
+var $window_o : cs:C1710.cWindow
+
 
 // ----------------------------------------------------
 
 $StackSize_i:=0
-$Form_t:=Current method name:C684
-$DesiredProcessName_t:="$"+Current method name:C684
+$formName_t:=Current method name:C684
+$DesiredProcessName_t:="$"+$formName_t
 
 If (Current process name:C1392=$DesiredProcessName_t)
 	
+	$window_o:=cs:C1710.cWindow.new()
+	$window_o.Title("Demo")
+	$window_o.CloseBox(True:C214)
+	$window_o.windowStyle(Plain form window:K39:10)
+	$window_o.Position(FW Centre)
+	$window_o.getSizeFromForm($formName_t)
 	
-	$WindowID_i:=Open form window:C675($Form_t;Plain form window:K39:10;Horizontally centered:K39:1;Vertically centered:K39:4;*)
-	DIALOG:C40($Form_t)
+	
+	$Form_o:=New object:C1471()
+	$Form_o.windowDetails:=$window_o
+	
+	$WindowID_i:=$window_o.drawWindow()
+	
+	//$WindowID_i:=Open form window($formName_t;Plain form window;Horizontally centered;At the top;*)
+	DIALOG:C40($formName_t;$Form_o)
 	CLOSE WINDOW:C154
 	
 	

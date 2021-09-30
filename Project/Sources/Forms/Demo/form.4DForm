@@ -11,6 +11,7 @@
 	"markerFooter": 240,
 	"events": [
 		"onLoad",
+		"onCloseBox",
 		"onTimer",
 		"onPageChange"
 	],

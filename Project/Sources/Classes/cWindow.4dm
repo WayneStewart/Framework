@@ -29,13 +29,7 @@ Class constructor
 	If ($1.position#Null:C1517)
 		This:C1470.position:=$1.position
 	Else 
-		This:C1470.position:=Plain window:K34:13
-	End if 
-	
-	If ($1.position#Null:C1517)
-		This:C1470.position:=$1.position
-	Else 
-		This:C1470.position:=Plain window:K34:13
+		This:C1470.position:=FW Centre
 	End if 
 	
 	If ($1.width#Null:C1517)
@@ -44,7 +38,7 @@ Class constructor
 		This:C1470.width:=512
 	End if 
 	
-	If ($1.width#Null:C1517)
+	If ($1.height#Null:C1517)
 		This:C1470.height:=$1.height
 	Else 
 		This:C1470.height:=342
@@ -66,7 +60,7 @@ Function windowStyle($windowStyle : Integer)->$result : Integer
 	End if 
 	$result:=This:C1470.style
 	
-Function setCloseBox($useCloseBox : Boolean)->$result : Boolean
+Function CloseBox($useCloseBox : Boolean)->$result : Boolean
 	If (Count parameters:C259=1)
 		This:C1470.closeBox:=$useCloseBox
 	End if 
@@ -133,15 +127,10 @@ Function drawWindow
 	// Return the window ID as a number
 	$0:=This:C1470.windowReferenceNumber
 	
-Function copy
-	$0:=Super:C1706.copy()
-	$0.windowReferenceNumber:=Null:C1517  // Remove the existing window reference
 	
-Function formMethod
+Function formMethod($formEvent_i : Integer)
 	
-	If (Count parameters:C259=1)
-		$formEvent_i:=$1
-	Else 
+	If (Count parameters:C259=0)
 		$formEvent_i:=Form event code:C388
 	End if 
 	
@@ -156,6 +145,25 @@ Function formMethod
 			
 			
 	End case 
+	
+Function getSizeFromForm
+	C_VARIANT:C1683($1)
+	C_TEXT:C284($2;$formName_t)
+	C_POINTER:C301($table_ptr)
+	var $width;$height : Integer
+	
+	Case of 
+		: (Value type:C1509($1)=Is pointer:K8:14)
+			$table_ptr:=$1
+			$formName_t:=$2
+			FORM GET PROPERTIES:C674($table_ptr->;$formName_t;$width;$height)
+		Else 
+			$formName_t:=$1
+			FORM GET PROPERTIES:C674($formName_t;$width;$height)
+	End case 
+	
+	This:C1470.width:=$width
+	This:C1470.height:=$height
 	
 	
 Function Position

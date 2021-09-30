@@ -1,3 +1,5 @@
+Form:C1466.windowDetails.formMethod()
+
 Case of 
 		
 	: (Form event code:C388=On Load:K2:1)

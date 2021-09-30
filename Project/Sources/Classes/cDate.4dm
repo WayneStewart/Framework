@@ -375,10 +375,3 @@ Function isEqualTo($comparisonDate : cs:C1710.cDate)->$result : Boolean
 	$result:=(This:C1470.value=$comparisonDate.value)\
 		 & (This:C1470.timeValue=$comparisonDate.timeValue)
 	
-	
-	
-	
-	
-	
-	
-	
